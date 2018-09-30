@@ -20,8 +20,10 @@ int Wallet::exist(std::string n)
 {
 	for (int i = 0; i < 5; i++) {
 		if (currencies[i] != nullptr) {
-			if (n == currencies[i]->getName())
+			if (n == currencies[i]->getName()) {
+				std::cout << "we found something at: " << i << std::endl;
 				return i;
+			}
 		}
 	}
 	return -1;
@@ -94,5 +96,10 @@ void Wallet::outputCur(std::string a)
 	int position = exist(a);
 
 	if (position > -1)
-		std::cout << currencies[position];
+		std::cout << *currencies[position];
+}
+
+void Wallet::test()
+{
+	currencies[0] = new Dollar(5,10);
 }

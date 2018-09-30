@@ -20,6 +20,8 @@ public:
 	void empty(); //empties wallet
 
 	void outputCur(std::string);
+
+	void test();
 };
 
 #endif
