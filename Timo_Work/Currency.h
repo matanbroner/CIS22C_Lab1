@@ -35,24 +35,28 @@ public:
 class Euro : public Currency
 {
 public:
+	Euro(Currency& a) : Currency("Euro", a.getWhole(), a.getPart(), "cent") {}
 	Euro(int w, int p) : Currency("Euro", w, p, "cent") {}
 };
 
 class Yen : public Currency
 {
 public:
+	Yen(Currency& a) : Currency("Yen", a.getWhole(), a.getPart(), "sen") {}
 	Yen(int w, int p) : Currency("Yen", w, p, "sen") {}
 };
 
 class Rupee : public Currency
 {
 public:
+	Rupee(Currency& a) : Currency("Rupee", a.getWhole(), a.getPart(), "paise") {}
 	Rupee(int w, int p) : Currency("Rupee", w, p, "paise") {}
 };
 
 class Yuan : public Currency
 {
 public:
+	Yuan(Currency& a) : Currency("Yuan", a.getWhole(), a.getPart(), "fen") {}
 	Yuan(int w, int p) : Currency("Yuan", w, p, "fen") {}
 };
 #endif

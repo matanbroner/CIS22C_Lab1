@@ -1,2 +1,3 @@
-# Doesn't work
-currently working on fixing it but this is what I have for now
+# Works
+I don't think anything is broken
+needs menu

@@ -32,7 +32,7 @@ Currency operator-(const Currency& a, const Currency& b)
 	if (a.part + b.part < 0)
 		return Currency(a.name, a.whole - b.whole - 1, a.part - b.part + 100, a.fraction);
 	else
-		return Currency(a.name, a.whole + b.whole, a.part + b.part, a.fraction);
+		return Currency(a.name, a.whole - b.whole, a.part - b.part, a.fraction);
 }
 
 std::ostream & operator<<(std::ostream& stream, const Currency& a)
