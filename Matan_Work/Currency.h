@@ -36,6 +36,7 @@ public:
     friend std::ostream& operator<< (std::ostream& output, const Currency &c);
     friend std::istream& operator>> (std::istream& input, Currency &c);
     
+    static double round(double);
     void setCurrency(double value);
     void normalizeCurrency();
     

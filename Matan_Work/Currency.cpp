@@ -49,10 +49,16 @@ void Currency::normalizeCurrency()
     }
 }
 
+double Currency::round(double val)
+{
+    double value = (int)(val * 100 + .5);
+    return (double)value / 100;
+}
+
 double Currency:: getCurrValue() const
 {
     double dec = ((double)this->c_fraction)/100;
-    return (this->c_whole + dec);
+    return round(this->c_whole + dec);
 }
 
 string Currency:: getType() const

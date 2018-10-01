@@ -58,6 +58,7 @@ void Wallet::addCurrency(Currency* c)
     cin >> valueAdd;
     if (valueAdd >= 0)
     {
+        valueAdd = Currency::round(valueAdd);
         *c += valueAdd;
         cout << valueAdd << " " << c->getType() << "s added to your wallet!" << endl;
     }
@@ -75,6 +76,7 @@ void Wallet::subtractCurrency(Currency* c)
     {
         if (valueSub <= c->getCurrValue())
         {
+            valueSub = Currency::round(valueSub);
             *c -= valueSub;
             cout << valueSub << " " << c->getType() << "s subtracted from your wallet!" << endl;
         }
@@ -93,6 +95,7 @@ void Wallet::zeroOut()
 {
     for (int i = 0; i < 5; i++)
         this->currArr[i]->setCurrency(0);
+    cout << "All " << NUMCURRS << " set to 0 value." << endl;
 }
 
 bool Wallet::walletEmpty()
@@ -127,6 +130,7 @@ int Wallet::currencyIndexer()
 
 void Wallet::userManual()
 {
+    cout << "<< Wallet User Manual >>\n" << endl;
     cout << "The wallet you are using is able to hold " << NUMCURRS << " types of currencies!" << endl;
     cout << "All currenices are based in increments of 1:100, meaning 100 small parts makes a whole currency value." << endl;
     cout << "Your wallet cannot hold negative values of currencies as a bank account would, any attempt to do so will leave the currency balance at hand with 0." << endl;
