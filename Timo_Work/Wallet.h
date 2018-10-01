@@ -20,8 +20,11 @@ public:
 	void empty(); //empties wallet
 
 	void outputCur(std::string);
+	void outputAll();
 
-	void test();
+	int currIndex(Currency&);
+
+	Currency* operator[](int);
 };
 
 #endif

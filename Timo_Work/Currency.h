@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "string"
+#include <iomanip>
 
 class Currency
 {
@@ -15,13 +16,18 @@ public:
 	virtual ~Currency();
 
 	std::string getName() { return this->name; };
+	std::string getFraction() {	return this->fraction; };
 	int getWhole() { return this->whole; };
 	int getPart() { return this->part; };
+	void setName(std::string n) { this->name = n; };
+	void setFraction(std::string f) { this->fraction = f; };
+	void setWhole(int w) { this->whole = w; };
+	void setPart(int p) { this->part = p; };
 
 	friend Currency operator+(const Currency&, const Currency&);
 	friend Currency operator-(const Currency&, const Currency&);
 
-	friend std::ostream& operator<<(std::ostream& stream, const Currency&);
+	friend std::ostream& operator<<(std::ostream& stream, Currency&);
 	friend std::istream& operator>>(std::istream& stream, Currency&);
 };
 
