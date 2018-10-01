@@ -75,7 +75,7 @@ void Wallet::subtract(Currency &a)
 
 		*currencies[position] = *currencies[position] - a;
 	} catch (std::string msg) {
-		std::cout << "We broke :c " << msg << std::endl;
+		std::cout << "Error: " << msg << std::endl;
 	}
 }
 

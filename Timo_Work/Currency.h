@@ -19,7 +19,7 @@ public:
 	std::string getFraction() {	return this->fraction; };
 	int getWhole() { return this->whole; };
 	int getPart() { return this->part; };
-	void setName(std::string n) { this->name = n; };
+	void setName(std::string);
 	void setFraction(std::string f) { this->fraction = f; };
 	void setWhole(int w) { this->whole = w; };
 	void setPart(int p) { this->part = p; };

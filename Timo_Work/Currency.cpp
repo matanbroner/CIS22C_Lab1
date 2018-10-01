@@ -12,6 +12,26 @@ Currency::~Currency()
 {
 }
 
+void Currency::setName(std::string n)
+{
+	this->name = n;
+	if (name == "Dollar") {
+		fraction = "cent";
+	}
+	else if (name == "Euro") {
+		fraction = "cent";
+	}
+	else if (name == "Yen") {
+		fraction = "sen";
+	}
+	else if (name == "Rupee") {
+		fraction = "paise";
+	}
+	else if (name == "Yuan") {
+		fraction = "fen";
+	}
+}
+
 Currency operator+(const Currency& a, const Currency& b)
 {
 	int temp = a.whole + b.whole;
@@ -37,23 +57,6 @@ Currency operator-(const Currency& a, const Currency& b)
 
 std::ostream & operator<<(std::ostream& stream, Currency& a)
 {
-	if (a.fraction == "") {
-		if (a.name == "Dollar") {
-			a.fraction = "cent";
-		}
-		else if (a.name == "Euro") {
-			a.fraction = "cent";
-		}
-		else if (a.name == "Yen") {
-			a.fraction = "sen";
-		}
-		else if (a.name == "Rupee") {
-			a.fraction = "paise";
-		}
-		else if (a.name == "Yuan") {
-			a.fraction = "fen";
-		}
-	}
 	stream << a.name << ", " << a.whole << ", " << a.part << ", " << a.fraction << std::endl;
 	return stream;
 }
@@ -74,7 +77,7 @@ std::istream & operator>>(std::istream& stream, Currency& a)
 		a.setPart( (input - floor(input))*100+.5 ); // adding .5 because compiler truncates
 
 	} catch (std::string msg) {
-		std::cout << "We broke :c " << msg << std::endl;
+		std::cout << "Error: " << msg << std::endl;
 	}
 	return stream;
 }
