@@ -1,7 +1,5 @@
 #include "Currency.h"
 
-
-
 Currency::Currency()
 {
 }
@@ -48,8 +46,9 @@ Currency operator+(const Currency& a, const Currency& b)
 
 Currency operator-(const Currency& a, const Currency& b)
 {
-	int temp = a.whole + b.whole;
-	if (a.part - b.part < 0)
+	if (a.whole - b.whole)
+		return a;
+	if (a.part - b.part < 0 )
 		return Currency(a.name, a.whole - b.whole - 1, a.part - b.part + 100, a.fraction);
 	else
 		return Currency(a.name, a.whole - b.whole, a.part - b.part, a.fraction);
@@ -74,7 +73,7 @@ std::istream & operator>>(std::istream& stream, Currency& a)
 		}
 
 		a.setWhole( floor(input) );
-		a.setPart( (input - floor(input))*100+.5 ); // adding .5 because compiler truncates
+		a.setPart( (input - floor(input))*100+.5 ); // adding .5 because compiler truncates when converting from double to int
 
 	} catch (std::string msg) {
 		std::cout << "Error: " << msg << std::endl;

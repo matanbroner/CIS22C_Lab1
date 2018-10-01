@@ -73,7 +73,12 @@ void Wallet::subtract(Currency &a)
 		if (position == -1)
 			throw std::string("Input is invalid. Please try again.\n");
 
-		*currencies[position] = *currencies[position] - a;
+
+		if (currencies[position]->getWhole() - a.getWhole() < 0) {
+			throw std::string("Input is invalid. Please try again.\n");
+		}
+		else
+			*currencies[position] = *currencies[position] - a;
 	} catch (std::string msg) {
 		std::cout << "Error: " << msg << std::endl;
 	}
@@ -81,12 +86,16 @@ void Wallet::subtract(Currency &a)
 
 bool Wallet::isEmpty()
 {
-	bool isEmpty = true;
+	bool isEmpty = false;
 	for (int i = 0; i < 5; i++) {
-		if (currencies[i] != nullptr) {
-			if (currencies[i]->getWhole() != 0 && currencies[i]->getPart() != 0)
-				isEmpty = false;
+		if (currencies[i] == nullptr) {
+			isEmpty = true;
 		}
+		else if (currencies[i]->getWhole() == 0 && currencies[i]->getPart() == 0) {
+			isEmpty = true;
+		}
+		else
+			return false;
 	}
 	return isEmpty;
 }
