@@ -30,6 +30,8 @@ Dollar Dollar::operator-(const Dollar &d)
     return temp;
 }
 
+Dollar::~Dollar(){}
+
 Euro::Euro(double value) : Currency("Euro", "Cent", value)
 {}
 
@@ -51,6 +53,9 @@ Euro Euro::operator-(const Euro &d)
     
     return temp;
 }
+
+Euro::~Euro(){}
+
 
 Yen::Yen(double value) : Currency("Yen", "Sen", value)
 {}
@@ -74,6 +79,9 @@ Yen Yen::operator-(const Yen &d)
     return temp;
 }
 
+Yen::~Yen(){}
+
+
 Rupee::Rupee(double value) : Currency("Rupee", "Paise", value)
 {}
 
@@ -96,6 +104,9 @@ Rupee Rupee::operator-(const Rupee &d)
     return temp;
 }
 
+Rupee::~Rupee(){}
+
+
 Yuan::Yuan(double value) : Currency("Yuan", "Fen", value)
 {}
 
@@ -117,3 +128,8 @@ Yuan Yuan::operator-(const Yuan &d)
     
     return temp;
 }
+
+Yuan::~Yuan(){}
+
+
+

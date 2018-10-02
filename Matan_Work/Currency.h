@@ -40,6 +40,7 @@ public:
     void setCurrency(double value);
     void normalizeCurrency();
     
+    virtual ~Currency(){};
 
 };
 

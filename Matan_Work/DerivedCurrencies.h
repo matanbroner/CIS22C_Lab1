@@ -18,7 +18,7 @@ public:
     
     Dollar operator +(const Dollar& d);
     Dollar operator -(const Dollar& d);
-    
+    ~Dollar();
 };
 
 class Euro : public Currency
@@ -29,6 +29,7 @@ public:
     
     Euro operator +(const Euro& d);
     Euro operator -(const Euro& d);
+    ~Euro();
 };
 
 class Yen : public Currency
@@ -39,6 +40,7 @@ public:
     
     Yen operator +(const Yen& d);
     Yen operator -(const Yen& d);
+    ~Yen();
 };
 
 class Rupee : public Currency
@@ -49,6 +51,7 @@ public:
     
     Rupee operator +(const Rupee& d);
     Rupee operator -(const Rupee& d);
+    ~Rupee();
 };
 
 class Yuan : public Currency
@@ -59,5 +62,6 @@ public:
     
     Yuan operator +(const Yuan& d);
     Yuan operator -(const Yuan& d);
+    ~Yuan();
 };
 #endif /* DerivedCurrencies_h */

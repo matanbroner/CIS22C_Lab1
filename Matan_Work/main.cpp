@@ -48,10 +48,17 @@ int main(int argc, const char * argv[]) {
                 break;
             case 7:
                 cout << "Exiting eWallet..." << endl;
+                break;
             default: cout << "Error occured with menu choice..." << endl;
         }
         cout << endl << endl;
-        system("clear");
+        if (menuOption != 7)
+        {
+            cout << "Press ENTER to continue...";
+            cin.get();
+            cin.get();
+            system("clear");
+        }
     }
     cout << "Thanks for using eWallet! Goodbye!" << endl;
     
@@ -60,7 +67,7 @@ int main(int argc, const char * argv[]) {
 
 int menuOptions()
 {
-    int menuOption = 0;
+    int menuOption = -1;
     cout << "Options for operations: " << endl;
     cout << "[1] -- View entire wallet status" << endl;
     cout << "[2] -- View individual currency status" << endl;
@@ -73,9 +80,25 @@ int menuOptions()
     do
     {
         cout << "--> ";
-        cin >> menuOption;
+        try
+        {
+            cin >> menuOption;
+            if (cin.fail())
+            {
+                cin.clear();
+                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                throw "Illegal value given, choose again.\n";
+            }
+            else if (menuOption < 1 || menuOption > 7)
+                throw "Out of bounds error, choose again.\n";
+        }
+        catch(char const* error)
+        {
+            cout << error;
+            menuOption = -1;
+        }
     }
-    while (menuOption < 1 || menuOption > 7);
+    while (menuOption == -1);
     
     return menuOption;
 }

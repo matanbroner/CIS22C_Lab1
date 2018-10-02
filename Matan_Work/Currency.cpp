@@ -7,13 +7,14 @@
 //
 
 #include <stdio.h>
+#include <iomanip>
 #include "Currency.h"
 
 using namespace std;
 
 Currency::Currency(string name, string f_name, double value) : c_name(name), c_fraction_name(f_name)
 {
-    setCurrency(value);
+    setCurrency(round(value));
 }
 
 Currency::Currency(string name, string f_name): c_name(name), c_fraction_name(f_name), c_whole(0), c_fraction(0)
@@ -21,10 +22,11 @@ Currency::Currency(string name, string f_name): c_name(name), c_fraction_name(f_
 
 void Currency::setCurrency(double value)
 {
-    int whole_place = value;
-    this->c_whole = whole_place;
-    double dec_place = (value - whole_place) * 100;
+    int whole_place = value * 100;
+    double dec_place = whole_place % 100;
+    whole_place /= 100;
     this->c_fraction = dec_place;
+    this->c_whole = whole_place;
     normalizeCurrency();
 }
 
@@ -58,7 +60,7 @@ double Currency::round(double val)
 double Currency:: getCurrValue() const
 {
     double dec = ((double)this->c_fraction)/100;
-    return round(this->c_whole + dec);
+    return (this->c_whole + dec);
 }
 
 string Currency:: getType() const
@@ -78,7 +80,7 @@ istream &operator>> (istream &input, Currency &c)
 ostream& operator<< (ostream& output, const Currency &c)
 {
     cout << "Currency Type: " << c.c_name << ", " << c.c_fraction_name << endl;
-    cout << "Value: " << c.getCurrValue();
+    cout << "Value: " << fixed << setprecision(2) << c.getCurrValue();
     return output;
 }
 
