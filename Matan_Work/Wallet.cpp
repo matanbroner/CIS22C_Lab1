@@ -14,6 +14,10 @@ using namespace std;
 
 Wallet::Wallet()
 {
+    /*
+     Currencies are instantiated by using polymorphic contruction.
+     */
+    
     this->currArr[0] = new Dollar();
     this->currArr[1] = new Euro();
     this->currArr[2] = new Yen();
@@ -24,18 +28,20 @@ Wallet::Wallet()
 
 Currency* Wallet::operator[](int i)
 {
-    if( i > 4 ) {
-        cout << "Index out of bounds" <<endl;
-        // return first element.
-        return currArr[0];
+    try{
+    return this->currArr[i];
     }
-    return currArr[i];
+    catch (const std::out_of_range& oor) // index beyond available values has been entered
+    {
+        cout << "OUT OF BOUNDS ERROR\n--> Returning first currency index in Wallet..." << endl;
+        return this->currArr[0];
+    }
 }
 
 void Wallet::getCurrInfo()
 {
     int index = currencyIndexer();
-    cout << *this->currArr[index] << endl;
+    cout << *this->currArr[index] << endl; // dereference pointer to properly display currency
 }
 
 void Wallet::getWalletInfo()
@@ -53,6 +59,12 @@ void Wallet::getWalletInfo()
     }
 }
 
+/*
+ This method allows user to add value to one of the currencies in their wallet.
+ The method also ensures that no illegal values are given threw exception handling.
+ The user is unable to add negative values, this would be a flaw in the logic.
+ Finally, values are printed in proper currency format (ie. two decimal places)
+*/
 void Wallet::addCurrency(Currency* c)
 {
     double valueAdd = 0;
@@ -82,6 +94,13 @@ void Wallet::addCurrency(Currency* c)
         cout << "Cannot perform additions of negative values on currencies.\nUse 'subtract' feature." << endl;
 }
 
+/*
+ This method allows user to subtract value to one of the currencies in their wallet.
+ The method also ensures that no illegal values are given threw exception handling.
+ The user is unable to subtract negative values, this would be a flaw in the logic.
+ If the amount of currency requested to subtract is more than is present, the value is set to 0.
+ Finally, values are printed in proper currency format (ie. two decimal places)
+ */
 void Wallet::subtractCurrency(Currency* c)
 {
     double valueSub = 0;
@@ -125,6 +144,10 @@ void Wallet::subtractCurrency(Currency* c)
         cout << "Cannot perform subtractions of negative values on currencies.\nUse 'add' feature." << endl;
 }
 
+/*
+ This method checks if there are nonzero values in the currencies in the wallet, and sets them to 0.
+ The values erased are printed out with their resepctive currency name.
+ */
 void Wallet::zeroOut()
 {
     if (!this->walletEmpty())
@@ -151,6 +174,11 @@ bool Wallet::walletEmpty()
     else return false;
 }
 
+/*
+ This method presents the user with a menu of presently available currencies to choose from.
+ If an illegal or out of bounds value is entered, an excpetion is thrown an handled.
+ The index is returned for further use.
+ */
 int Wallet::currencyIndexer()
 {
     int index = -1;
@@ -166,7 +194,7 @@ int Wallet::currencyIndexer()
         try
         {
             cin >> index;
-            if (cin.fail())
+            if (cin.fail()) // illegal value given
             {
                 cin.clear();
                 cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');

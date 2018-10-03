@@ -22,12 +22,12 @@ Currency::Currency(string name, string f_name): c_name(name), c_fraction_name(f_
 
 void Currency::setCurrency(double value)
 {
-    int whole_place = value * 100;
-    double dec_place = whole_place % 100;
-    whole_place /= 100;
+    int whole_place = value * 100; // removes 2 decimals aspect
+    double dec_place = whole_place % 100; // modified value is then divided by 100 to get fractional amount
+    whole_place /= 100; // returns two decimal places
     this->c_fraction = dec_place;
     this->c_whole = whole_place;
-    normalizeCurrency();
+    normalizeCurrency(); // ensures that fractional is not past 100
 }
 
 void Currency:: operator +(){}
@@ -51,6 +51,10 @@ void Currency::normalizeCurrency()
     }
 }
 
+/*
+ round(double val) takes val, multiplies it by 100, adds 0.5, and casts it to an int
+ val is then returned as cast into double and divided by 100
+ */
 double Currency::round(double val)
 {
     double value = (int)(val * 100 + .5);
