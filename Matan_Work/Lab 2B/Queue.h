@@ -20,6 +20,8 @@ public:
     T dequeue();
     T front();
     T rear();
+    
+    void printQueue();
     bool queueEmpty();
     void emptyQueueContents();
     
@@ -48,6 +50,12 @@ template<typename T>
 T Queue<T>::rear()
 {
     return this->getDataAtIndex(this->getCount()-1);
+}
+
+template<typename T>
+void Queue<T>::printQueue()
+{
+    this->printList();
 }
 
 template<typename T>
